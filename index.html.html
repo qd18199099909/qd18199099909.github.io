@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成绩查询系统</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- 确保引入了 Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>全国大学英语四六级成绩查询系统</h1>
+    </header>
+
+    <main>
+        <div class="login-container">
+            <h2>考生登录</h2>
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="input-group">
+                    <i class="fas fa-id-card"></i>
+                    <input type="text" id="idNumber" placeholder="请输入证件号码" required>
+                    <small>请填写你的身份证号码或准考证号</small>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="请输入登录密码" required>
+                    <small>密码需为8位以上的数字和字母组合</small>
+                </div>
+
+                <div class="input-group captcha-group">
+                    <i class="fas fa-shield-alt"></i>
+                    <input type="text" id="captcha" placeholder="请输入验证码" required>
+                    <div class="captcha-container">
+                        <canvas id="captchaCanvas"></canvas>
+                        <button type="button" onclick="refreshCaptcha()" class="refresh-btn">
+                            <i class="fas fa-sync-alt"></i> 换一张
+                        </button>
+                    </div>
+                </div>
+
+                <div class="error-message" id="errorMessage"></div>
+
+                <button type="submit" class="login-btn">登录</button>
+
+                <div class="links">
+                    <a href="#" class="forgot-password">忘记密码？</a>
+                    <a href="#" class="register">新用户注册</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 全国大学英语四六级考试管理系统</p>
+        <p>联系我们：support@cet.edu.cn | 服务热线：400-123-4567</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

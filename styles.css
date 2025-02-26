@@ -1,0 +1,577 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #fff;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+}
+
+main {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    color: #7f8c8d;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.input-group small {
+    display: block;
+    color: #7f8c8d;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.captcha-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.captcha-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+#captchaCanvas {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 40px;
+    width: 100px;
+    background-color: #fff;
+}
+
+.refresh-btn {
+    background: none;
+    border: none;
+    color: #3498db;
+    cursor: pointer;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    padding: 5px 10px;
+}
+
+.refresh-btn:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #e74c3c;
+    text-align: center;
+    margin-bottom: 1rem;
+    min-height: 1.5rem;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #2980b9;
+}
+
+.links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.links a {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #fff;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+footer p {
+    margin: 0.5rem 0;
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 1.5rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .captcha-container {
+        flex-wrap: wrap;
+    }
+    
+    #captchaCanvas {
+        width: 120px;
+        height: 45px;
+    }
+    
+    .refresh-btn {
+        padding: 8px 12px;
+    }
+}
+
+/* 成绩查询模态框样式 */
+.score-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.score-modal.show {
+    opacity: 1;
+}
+
+.score-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.score-content h2 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.personal-info {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.info-item {
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-item .label {
+    color: #7f8c8d;
+    min-width: 100px;
+}
+
+.info-item .value {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.score-tables {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.score-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.score-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.score-section th,
+.score-section td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.score-section th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.score-section td {
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.score-section table th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 500;
+    min-width: 120px;
+}
+
+.score-section table td {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.modal-buttons button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+.print-btn {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.print-btn:hover {
+    background-color: #2980b9;
+}
+
+.close-btn {
+    background-color: #95a5a6;
+    color: #fff;
+}
+
+.close-btn:hover {
+    background-color: #7f8c8d;
+}
+
+/* 打印样式 */
+@media print {
+    body > *:not(.score-modal) {
+        display: none;
+    }
+
+    .score-modal {
+        position: static;
+        background: none;
+    }
+
+    .score-content {
+        box-shadow: none;
+        max-width: 100%;
+    }
+
+    .modal-buttons {
+        display: none;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .score-content {
+        padding: 1rem;
+        width: 95%;
+        margin: 1rem;
+    }
+
+    .score-content h2 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    /* 个人信息响应式 */
+    .personal-info {
+        padding: 1rem;
+    }
+
+    .info-item {
+        flex-direction: column;
+        gap: 0.3rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .info-item .label {
+        min-width: auto;
+        color: #2c3e50;
+        font-weight: 500;
+    }
+
+    /* 成绩表格响应式 */
+    .score-tables {
+        gap: 1rem;
+    }
+
+    .score-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* 让表格可以水平滚动 */
+    .score-section {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .score-section table {
+        min-width: 100%;
+        white-space: nowrap;
+    }
+
+    .score-section th,
+    .score-section td {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    /* 调整按钮大小 */
+    .modal-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .modal-buttons button {
+        width: 100%;
+        padding: 0.6rem 1rem;
+        justify-content: center;
+    }
+}
+
+/* 超小屏幕设备 */
+@media (max-width: 320px) {
+    .score-content {
+        padding: 0.8rem;
+    }
+
+    .score-content h2 {
+        font-size: 1rem;
+    }
+
+    .score-section th,
+    .score-section td {
+        padding: 0.4rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* 打印样式优化 */
+@media print {
+    .score-content {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    .score-section table {
+        page-break-inside: avoid;
+    }
+
+    .info-item {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* 加载动画样式 */
+.login-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.fa-spin {
+    animation: fa-spin 1s infinite linear;
+}
+
+@keyframes fa-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 个人信息区域布局 */
+.info-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.info-main {
+    flex: 1;
+}
+
+/* 添加总分颜色样式 */
+.score-section td:first-child {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+/* 修改打印样式 */
+@media print {
+    .score-modal {
+        position: static;
+        background: none;
+    }
+
+    .score-content {
+        box-shadow: none;
+        max-width: 100%;
+        padding: 20px;
+        background-color: #f0f8ff !important; /* 淡蓝色背景 */
+        -webkit-print-color-adjust: exact !important; /* Chrome/Safari */
+        print-color-adjust: exact !important; /* Firefox */
+    }
+
+    .modal-buttons {
+        display: none;
+    }
+
+    .personal-info {
+        background-color: transparent !important;
+    }
+
+    .score-section table {
+        page-break-inside: avoid;
+        border-collapse: collapse;
+    }
+
+    .score-section th,
+    .score-section td {
+        border: 1px solid #000 !important;
+    }
+
+    /* 确保背景色和边框在打印时可见 */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .info-wrapper {
+        flex-direction: column;
+    }
+}
+
+.notice-text {
+    margin-top: 1rem;
+    color: #666;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 0 1rem;
+    line-height: 1.5;
+}
+
+.notice-text a {
+    color: #3498db;  /* 更亮的蓝色 */
+    text-decoration: none;
+    transition: color 0.2s;  /* 添加颜色过渡效果 */
+    font-weight: 500;  /* 稍微加粗 */
+}
+
+.notice-text a:hover {
+    color: #2980b9;  /* 悬停时的深蓝色 */
+    text-decoration: underline;
+}
+
+/* 打印时的链接样式 */
+@media print {
+    .notice-text a {
+        color: #000;
+        text-decoration: none;
+    }
+} 
